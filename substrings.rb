@@ -1,8 +1,8 @@
-def substrings (word, dictionary)
+def substrings (string, string_array)
   string_counts = {}
-  dictionary.each do |entry|
-    if word.downcase.include?(entry)
-      instances = word.downcase.scan(entry)
+  string_array.each do |entry|
+    if string.downcase.include?(entry)
+      instances = string.downcase.scan(entry)
       count = instances.count
       string_counts[entry] = count
     end

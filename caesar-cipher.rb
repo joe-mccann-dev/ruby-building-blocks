@@ -8,7 +8,7 @@ def caesar_cipher(str, key=0)
     elsif (char.ord >= 65 && char.ord <= 90) 
       char = ((char.ord - 65 + key) % 26 + 65).chr
     else
-      char = char # don't change punctuation or whitespace
+      char # don't change punctuation or whitespace
     end
   end
   shifted_characters.join

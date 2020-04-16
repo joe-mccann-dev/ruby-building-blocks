@@ -1,3 +1,4 @@
+#!/usr/bin/ruby
 def substrings (string, string_array)
   string_counts = {}
   string_array.each do |entry|

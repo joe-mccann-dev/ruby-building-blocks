@@ -1,3 +1,4 @@
+#!/usr/bin/ruby
 def caesar_cipher(str, key=0)
   characters = str.each_char.to_a
   shifted_characters = characters.map do |char|

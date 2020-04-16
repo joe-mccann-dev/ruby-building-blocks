@@ -1,3 +1,4 @@
+#!/usr/bin/ruby
 def stock_picker(days)
   buy_day = 0
   profit = 0

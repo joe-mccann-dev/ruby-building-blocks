@@ -130,7 +130,17 @@ module Enumberable
     my_each_with_index { |item, index| result[index] = yield(item) } #change each index of result by yielding to block
     result
   end
+
+  def my_map! #mutates original array
+    return to_enum(:my_map!) unless block_given?
+    my_each_with_index { |item, index| self[index] = yield(item) }
+  end
     
+  def my_reduce(*args)
+    if args
+      my_each_with_index { |item, index| self[index] = item(args)}
+    end
+  end
 end 
 
 include Enumberable

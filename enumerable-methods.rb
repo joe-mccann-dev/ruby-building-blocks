@@ -3,10 +3,12 @@ module Enumberable
 
   def my_each
     return to_enum(:my_each) unless block_given?
-    0.upto(self.size - 1) do |n|
+    n = 0
+    while n < self.size
       yield(self[n])                if self.is_a?(Array)
       yield(keys[n], self[keys[n]]) if self.is_a?(Hash)
-      yield(to_a[n])                if self.is_a?(Range)
+      yield([to_a[n]])              if self.is_a?(Range)
+      n += 1
     end
     self
   end
@@ -57,6 +59,7 @@ module Enumberable
       self.include?(nil) || self.include?(false) ? false : true
     end
   end
+
 
   def my_any? (pattern = nil)
     result = []

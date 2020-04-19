@@ -3,7 +3,7 @@ module Enumberable
 
   def my_each
     return to_enum(:my_each) unless block_given?
-    0.upto(self.length - 1) do |n|
+    0.upto(self.size - 1) do |n|
       yield(self[n])                if self.is_a?(Array)
       yield(keys[n], self[keys[n]]) if self.is_a?(Hash)
       yield(to_a[n])                if self.is_a?(Range)
@@ -15,7 +15,7 @@ module Enumberable
     return to_enum(:my_each_with_index) unless block_given?
     n = 0
     index = 0
-    while n < self.length
+    while n < self.size
       yield(self[n], index)         if self.is_a?(Array)
       yield(keys[n], self[keys[n]]) if self.is_a?(Hash)
       yield(to_a[n], index)         if self.is_a?(Range)

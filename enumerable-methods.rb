@@ -125,8 +125,8 @@ module Enumberable
 
   def my_map
     return to_enum(:my_map) unless block_given?
-    result= [] #prevent from mutating original array
-    my_each { |item| array << item } #push items of self into array that will be returned
+    result = [] #prevent from mutating original array
+    my_each { |item| result << item } #push items of self into array that will be returned
     my_each_with_index { |item, index| result[index] = yield(item) } #change each index of result by yielding to block
     result
   end

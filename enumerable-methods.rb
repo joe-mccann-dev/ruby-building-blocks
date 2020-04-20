@@ -60,7 +60,6 @@ module Enumberable
     end
   end
 
-
   def my_any? (pattern = nil) #not working with ranges(only works with integer ranges) or hashes
     result = []
     pattern_proc = Proc.new do  #proc to apply if a pattern is given
@@ -80,7 +79,7 @@ module Enumberable
     else
       return false if self.empty?
       my_each { |item| result << item if item }
-      result.empty? ? false : true # result will be empty is all values are nil or false, therefore my_any? returns false
+      result.empty? ? false : true # result will be empty if all values are nil or false, therefore my_any? returns false
     end
   end
 
@@ -123,15 +122,17 @@ module Enumberable
     self.is_a?(Hash) ? count - 2 : count
   end
 
-
-  def my_map
+  def my_map(procedure = nil)
     return to_enum(:my_map) unless block_given?
     result = [] #prevent from mutating original array
-    my_each { |item| result << item } #push items of self into array that will be returned
-    my_each_with_index { |item, index| result[index] = yield(item) } #change each index of result by yielding to block
+    if procedure
+      my_each { |item| result << procedure.call(item) } #push items modified by proc into result
+    else
+      my_each { |item| result << yield(item) } #use block if no proc given
+    end
     result
   end
-
+  
   def my_map! #mutates original array
     return to_enum(:my_map!) unless block_given?
     my_each_with_index { |item, index| self[index] = yield(item) }
@@ -146,8 +147,10 @@ module Enumberable
     end
     accumulator
   end
-
 end 
 
-include Enumberable
+def multiply_els(array) #testing my_reduce
+  array.my_reduce { |item, next_item| item * next_item }
+end
 
+include Enumberable

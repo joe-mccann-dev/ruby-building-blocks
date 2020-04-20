@@ -123,6 +123,7 @@ module Enumberable
     self.is_a?(Hash) ? count - 2 : count
   end
 
+
   def my_map
     return to_enum(:my_map) unless block_given?
     result = [] #prevent from mutating original array
@@ -136,11 +137,16 @@ module Enumberable
     my_each_with_index { |item, index| self[index] = yield(item) }
   end
     
-  def my_reduce(*args)
-    if args
-      my_each_with_index { |item, index| self[index] = item(args)}
+  def my_reduce
+    accumulator = self.to_a[0] #to_a so it works on ranges
+    index = 1
+    while index < self.size
+      accumulator = yield(accumulator, self.to_a[index]) #start reducing at first and second values
+      index += 1
     end
+    accumulator
   end
+
 end 
 
 include Enumberable

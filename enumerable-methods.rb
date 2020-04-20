@@ -138,9 +138,14 @@ module Enumberable
     my_each_with_index { |item, index| self[index] = yield(item) }
   end
     
-  def my_reduce
-    accumulator = self.to_a[0] #to_a so it works on ranges
-    index = 1
+  def my_reduce(starting_value = nil)
+    if starting_value == nil
+      accumulator = self.to_a[0] #to_a so it works on ranges
+      index = 1
+    else
+      accumulator = starting_value
+      index = 0
+    end
     while index < self.size
       accumulator = yield(accumulator, self.to_a[index]) #start reducing at first and second values
       index += 1

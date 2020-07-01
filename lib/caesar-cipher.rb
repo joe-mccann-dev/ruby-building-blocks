@@ -15,6 +15,6 @@ def caesar_cipher(str, key=0)
   shifted_characters.join
 end
 
-puts caesar_cipher("Czggj, Mpwt!", 5)
-puts caesar_cipher("What a string!", 5)
-puts caesar_cipher('Mjqqt, Btwqi!', -5)
+# puts caesar_cipher("Czggj, Mpwt!", 5)
+# puts caesar_cipher("What a string!", 5)
+# puts caesar_cipher('Mjqqt, Btwqi!', -5)

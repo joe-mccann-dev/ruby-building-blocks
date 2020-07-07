@@ -1,10 +1,10 @@
 #!/usr/bin/ruby
-def substrings (string, string_array)
+def substrings (string, dictionary)
   string_counts = {}
-  string_array.each do |entry|
+  dictionary.each do |entry|
     if string.downcase.include?(entry)
-      instances = string.downcase.scan(entry)
-      count = instances.count
+      occurences = string.downcase.scan(entry)
+      count = occurences.count
       string_counts[entry] = count
     end
   end
